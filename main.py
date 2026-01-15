@@ -1,4 +1,4 @@
-from src.parser import parse_log_file
+from src.parser import parse_log_file, detect_bruteforce
 
 
 def main():
@@ -13,6 +13,17 @@ def main():
             f"{entry['ip']} | "
             f"{entry['status']}"
         )
+
+    print("\n--- Security Analysis ---")
+
+    alerts = detect_bruteforce(entries)
+
+    if alerts:
+        print("⚠️  Potential brute-force attempts detected:\n")
+        for ip, count in alerts.items():
+            print(f"IP {ip} → {count} failed attempts")
+    else:
+        print("No suspicious activity detected.")
 
 
 if __name__ == "__main__":
