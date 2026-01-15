@@ -1,4 +1,4 @@
-from src.parser import parse_log_file, detect_bruteforce
+from src.parser import parse_log_file, detect_bruteforce, write_report
 
 
 def main():
@@ -26,6 +26,10 @@ def main():
             print(f"IP {ip} → {count} failed attempts")
     else:
         print("No suspicious activity detected.")
+
+    write_report(alerts)
+    print("\nReport written to report.txt")
+
 
 
 if __name__ == "__main__":
