@@ -3,6 +3,7 @@ from src.parser import parse_log_file, detect_bruteforce
 
 def main():
     log_file = "logs/sample.log"
+    threshold = 3
     entries = parse_log_file(log_file)
 
     print(f"Parsed {len(entries)} log entries\n")
@@ -15,8 +16,9 @@ def main():
         )
 
     print("\n--- Security Analysis ---")
+    print(f"Brute-force threshold: {threshold} failed attempts\n")
 
-    alerts = detect_bruteforce(entries)
+    alerts = detect_bruteforce(entries, threshold)
 
     if alerts:
         print("⚠️  Potential brute-force attempts detected:\n")
