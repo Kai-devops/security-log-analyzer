@@ -37,3 +37,14 @@ def detect_bruteforce(entries, threshold=3):
     }
 
     return suspicious
+
+def write_report(alerts, filepath="report.txt"):
+    with open(filepath, "w", encoding="utf-8") as file:
+
+        if not alerts:
+            file.write("No suspicious activity detected.\n")
+            return
+
+        file.write("Potential brute-force attempts detected:\n\n")
+        for ip, count in alerts.items():
+            file.write(f"IP {ip} → {count} failed attempts\n")
